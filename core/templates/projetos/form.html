@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo projeto</title>
+</head>
+<body>
+    <h1>Cadastrar projeto</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" maxlength="100" required>
+        <br><br>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required></textarea>
+        <br><br>
+
+        <label for="data_inicio">Data de início:</label>
+        <input type="date" id="data_inicio" name="data_inicio" required>
+        <br><br>
+
+        <button type="submit">Salvar projeto</button>
+    </form>
+
+    <a href="{% url 'lista_projetos' %}">Voltar para projetos</a>
+</body>
+</html>
