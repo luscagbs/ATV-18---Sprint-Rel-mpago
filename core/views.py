@@ -29,3 +29,38 @@ def novo_projeto(request):
         })
 
     return render(request, 'projetos/form.html')
+
+
+def editar_projeto(request, id):
+    projeto = Projeto.objects.get(id=id)
+
+    if request.method == 'POST':
+        projeto.nome = request.POST.get('nome')
+        projeto.descricao = request.POST.get('descricao')
+        projeto.data_inicio = request.POST.get('data_inicio')
+        projeto.save()
+
+        projetos = Projeto.objects.all()
+        return render(request, 'projetos/lista.html', {
+            'projetos': projetos
+        })
+
+    return render(request, 'projetos/editar.html', {
+        'projeto': projeto
+    })
+
+
+def excluir_projeto(request, id):
+    projeto = Projeto.objects.get(id=id)
+
+    if request.method == 'POST':
+        projeto.delete()
+
+        projetos = Projeto.objects.all()
+        return render(request, 'projetos/lista.html', {
+            'projetos': projetos
+        })
+
+    return render(request, 'projetos/excluir.html', {
+        'projeto': projeto
+    })
