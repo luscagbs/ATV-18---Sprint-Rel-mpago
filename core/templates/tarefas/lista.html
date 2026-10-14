@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+
+    <p><a href="{% url 'nova_tarefa' %}">+ Nova Tarefa</a></p>
+
+    {% if tarefas %}
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Data de entrega</th>
+                    <th>Projeto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarefa in tarefas %}
+                    <tr>
+                        <td>{{ tarefa.titulo }}</td>
+                        <td>{{ tarefa.descricao }}</td>
+                        <td>{{ tarefa.data_entrega|date:"d/m/Y" }}</td>
+                        <td>{{ tarefa.projeto }}</td>
+                        <td>
+                            <a href="{% url 'editar_tarefa' tarefa.id %}">Editar</a>
+                            |
+                            <a href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhuma tarefa cadastrada ainda.</p>
+        <p>Clique em <strong>+ Nova Tarefa</strong> para começar.</p>
+    {% endif %}
+
+    <p><a href="{% url 'lista_projetos' %}">Ver Projetos</a></p>
+</body>
+</html>
