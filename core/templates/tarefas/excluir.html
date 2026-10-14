@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excluir Tarefa</title>
-</head>
-<body>
-    <h1>Excluir Tarefa</h1>
+{% extends 'base.html' %}
 
-    <p>
+{% block titulo %}Excluir Tarefa{% endblock %}
+
+{% block conteudo %}
+    <h2>Excluir Tarefa</h2>
+
+    <div class="aviso">
         Tem certeza de que deseja excluir a tarefa
         <strong>{{ tarefa.titulo }}</strong>?
-    </p>
 
-    <p><strong>Projeto:</strong> {{ tarefa.projeto }}</p>
+        <p><strong>Projeto:</strong> {{ tarefa.projeto }}</p>
+    </div>
 
     <form method="POST">
         {% csrf_token %}
         <button type="submit">Sim, excluir tarefa</button>
+        <a class="botao" href="{% url 'lista_tarefas' %}">Cancelar</a>
     </form>
-
-    <p><a href="{% url 'lista_tarefas' %}">Cancelar</a></p>
-</body>
-</html>
+{% endblock %}

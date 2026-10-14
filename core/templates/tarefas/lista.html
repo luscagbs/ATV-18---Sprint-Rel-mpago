@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-</head>
-<body>
-    <h1>Lista de Tarefas</h1>
+{% extends 'base.html' %}
 
-    <p><a href="{% url 'nova_tarefa' %}">+ Nova Tarefa</a></p>
+{% block titulo %}Lista de Tarefas{% endblock %}
+
+{% block conteudo %}
+    <h2>Lista de Tarefas</h2>
+
+    <div class="acoes">
+        <a class="botao" href="{% url 'nova_tarefa' %}">+ Nova Tarefa</a>
+        <a class="botao" href="{% url 'lista_projetos' %}">Ver Projetos</a>
+    </div>
 
     {% if tarefas %}
-        <table border="1" cellpadding="8">
+        <table>
             <thead>
                 <tr>
                     <th>Título</th>
@@ -39,9 +39,6 @@
         </table>
     {% else %}
         <p>Nenhuma tarefa cadastrada ainda.</p>
-        <p>Clique em <strong>+ Nova Tarefa</strong> para começar.</p>
+        <p>Comece clicando em <strong>+ Nova Tarefa</strong>.</p>
     {% endif %}
-
-    <p><a href="{% url 'lista_projetos' %}">Ver Projetos</a></p>
-</body>
-</html>
+{% endblock %}
