@@ -1,31 +1,30 @@
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Novo projeto</title>
-</head>
-<body>
-    <h1>Cadastrar projeto</h1>
+{% extends 'base.html' %}
+
+{% block titulo %}Novo Projeto{% endblock %}
+
+{% block conteudo %}
+    <h2>Cadastrar Novo Projeto</h2>
 
     <form method="POST">
         {% csrf_token %}
 
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" maxlength="100" required>
-        <br><br>
+        <div class="campo">
+            <label for="nome">Nome do projeto:</label>
+            <input type="text" id="nome" name="nome" maxlength="100" required>
+        </div>
 
-        <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" required></textarea>
-        <br><br>
+        <div class="campo">
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" required></textarea>
+        </div>
 
-        <label for="data_inicio">Data de início:</label>
-        <input type="date" id="data_inicio" name="data_inicio" required>
-        <br><br>
+        <div class="campo">
+            <label for="data_inicio">Data de início:</label>
+            <input type="date" id="data_inicio" name="data_inicio" required>
+        </div>
 
-        <button type="submit">Salvar projeto</button>
+        <button type="submit">Salvar Projeto</button>
+        <a class="botao" href="{% url 'lista_projetos' %}">Cancelar</a>
     </form>
-
-    <a href="{% url 'lista_projetos' %}">Voltar para projetos</a>
-</body>
-</html>
+{% endblock %}

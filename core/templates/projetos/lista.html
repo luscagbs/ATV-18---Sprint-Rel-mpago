@@ -1,27 +1,43 @@
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Projetos</title>
-</head>
-<body>
-    <h1>Projetos cadastrados</h1>
+{% extends 'base.html' %}
 
-    <a href="{% url 'novo_projeto' %}">Novo projeto</a>
+{% block titulo %}Lista de Projetos{% endblock %}
 
+{% block conteudo %}
+    <h2>Meus Projetos</h2>
 
-    {% for projeto in projetos %}
-        <h2>{{ projeto.nome }}</h2>
-        <p>{{ projeto.descricao }}</p>
-        <p>Data de início: {{ projeto.data_inicio }}</p>
+    <div class="acoes">
+        <a class="botao" href="{% url 'novo_projeto' %}">+ Novo Projeto</a>
+        <a class="botao" href="{% url 'lista_tarefas' %}">Ver Tarefas</a>
+    </div>
 
-        <a href="{% url 'editar_projeto' projeto.id %}">Editar</a>
-        |
-        <a href="{% url 'excluir_projeto' projeto.id %}">Excluir</a>
-    {% empty %}
-        <p>Nenhum projeto cadastrado.</p>
-    {% endfor %}
-
-</body>
-</html>
+    {% if projetos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data de início</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for projeto in projetos %}
+                    <tr>
+                        <td>{{ projeto.nome }}</td>
+                        <td>{{ projeto.descricao }}</td>
+                        <td>{{ projeto.data_inicio|date:"d/m/Y" }}</td>
+                        <td>
+                            <a href="{% url 'editar_projeto' projeto.id %}">Editar</a>
+                            |
+                            <a href="{% url 'excluir_projeto' projeto.id %}">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhum projeto cadastrado ainda.</p>
+        <p>Clique em <strong>+ Novo Projeto</strong> para começar.</p>
+    {% endif %}
+{% endblock %}
