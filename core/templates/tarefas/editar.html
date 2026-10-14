@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefa</title>
+</head>
+<body>
+    <h1>Editar Tarefa</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo"
+               value="{{ tarefa.titulo }}" maxlength="100" required>
+        <br><br>
+
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" required>{{ tarefa.descricao }}</textarea>
+        <br><br>
+
+        <label for="data_entrega">Data de entrega:</label><br>
+        <input type="date" id="data_entrega" name="data_entrega"
+               value="{{ tarefa.data_entrega|date:'Y-m-d' }}" required>
+        <br><br>
+
+        <label for="projeto">Projeto relacionado:</label><br>
+        <select id="projeto" name="projeto" required>
+            {% for projeto in projetos %}
+                <option value="{{ projeto.id }}"
+                    {% if projeto.id == tarefa.projeto.id %}selected{% endif %}>
+                    {{ projeto.nome }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <p><a href="{% url 'lista_tarefas' %}">Voltar para tarefas</a></p>
+</body>
+</html>
